@@ -465,3 +465,8 @@ modificar_o_eliminar()
 print("\nInformación actualizada de las materias:")
 for materia in materias:
     materia.Informacion()
+
+
+
+
+    
