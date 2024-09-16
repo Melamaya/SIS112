@@ -24,8 +24,13 @@ class Entero:
 
     def esParImpar (self):
         return(self.Num% 2 == 0)
-   
+    
+    def esPerfecto(self) :
+        return sum( i for i in range (1, self.Num)if self.Num % i == 0) == self.Num
         
+    
+     
+    
         
     
     def menu (self):
@@ -36,7 +41,8 @@ class Entero:
             print("3.incrementar el numero")
             print("4.decrementar el numero")
             print("5. verificar si es par o impar")
-            print("6.salir ")
+            print("6.es perfecto")
+            print("7.salir ")
 
             opcion=input("ingrese una opcion")
             if opcion == '1' :
@@ -52,7 +58,12 @@ class Entero:
                     print("el numero es par ")
                 else :
                     print("el numero es impar ")
-            elif opcion == '6':
+            elif opcion == '6' :
+                if self.esPerfecto():
+                    print("el numero es perfecto ")
+                else :
+                    print("el numero no es  ")        
+            elif opcion == '7':
                 print("hasta luego")
                 break
             else:
