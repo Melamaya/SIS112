@@ -3,56 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz de Número Entero</title>
-    <!-- Incluir Bootstrap CSS desde un CDN -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Estilos adicionales opcionales -->
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-        .btn-custom {
-            margin: 5px;
-        }
-    </style>
+    <title>Manipulación de Número Entero</title>
+    
+    <!-- CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Archivo JavaScript Externo -->
+    <script defer src="entero.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center">Operaciones con Número Entero</h1>
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <!-- Input para número entero -->
-                <div class="form-group">
-                    <label for="numeroInput">Introduce un número entero:</label>
-                    <input type="number" class="form-control" id="numeroInput" placeholder="Número entero" value=0>
+                <h2 class="text-center">Manipulación de Número Entero</h2>
+                
+                <!-- Input para ingresar el número entero -->
+                <div class="mb-3">
+                    <label for="numeroInput" class="form-label">Ingrese un número entero:</label>
+                    <input type="number" id="numeroInput" class="form-control" placeholder="Número entero" value="0">
                 </div>
-                <!-- Botones para llamar a funciones -->
-                <button class="btn btn-primary btn-custom" onclick="cargarNum()">CARGAR NUM ENTERO</button>
-                <br>
-                <button class="btn btn-secondary btn-custom" onclick="mostrarNum()">MOSTRAR ENTERO</button>
-                <br>
                 
-                <button class="btn btn-success btn-custom" onclick="incrementarvalor()">(+)</button>
-                <button class="btn btn-danger btn-custom" onclick="decrementarvalor()">(-)</button>
-                <button class="btn btn-danger btn-custom" onclick="esParImparNum()">(Es Par Impar )</button>
-                <button class="btn btn-danger btn-custom" onclick="esPositivoNegativoNum()">(Es Positivo Negativo )</button>
-                    
+                <!-- Botones para ejecutar diferentes funciones -->
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" onclick="cargarNum()">CARGAR NUM ENTERO</button>
+                    <button class="btn btn-success" onclick="mostrarNum()">MOSTRAR ENTERO</button>
+                    <button class="btn btn-warning" onclick="incrementarValor()">(+)</button>
+                    <button class="btn btn-danger" onclick="decrementarValor()">(-)</button>
+                    <button class="btn btn-dark" onclick="esParImparNum()">ES PAR IMPAR</button>
+                    <button class="btn btn-dark" onclick="esPositivoNegativoNum()">ES POSITIVO O NEGATIVO</button>
+                    <button class="btn btn-info" onclick="calcularFactorial()">Calcular Factorial</button>
+                    <button class="btn btn-warning" onclick="verificarPerfecto()">¿Es Perfecto?</button>
+                    <button class="btn btn-secondary" onclick="verificarArmstrong()">¿Es Número de Armstrong?</button>
+                    <button class="btn btn-secondary" onclick="verificarPerfectoGeneralizado()">¿Es Perfecto Generalizado?</button>
+                    <button class="btn btn-secondary" onclick="calcularFilaTrianguloPascal()">Calcular Fila Pascal</button>
+                    <button class="btn btn-secondary" onclick="cifrarNumeroCesar()">Cifrado César</button>
+                    <button class="btn btn-secondary" onclick="verificarPrimoGemelo()">¿Tiene Primo Gemelo?</button>
+                    <button class="btn btn-secondary" onclick="descomponerFactoresPrimos()">Descomponer en Factores Primos</button>
+                    <button class="btn btn-secondary" onclick="calcularNumeroCatalan()">Calcular Número de Catalan</button>
+                    <button class="btn btn-secondary" onclick="verificarNumeroMersenne()">¿Es Número de Mersenne?</button>
+
+                </div>
                 
-                <h1>FACTORIAL</h1>
-                <button class="btn btn-danger btn-custom" onclick="FactorialNum()">(factorial )</button>
-                <h1>NUMEROS PERFECTOS </h1>
-                <button class="btn btn-danger btn-custom" onclick="esPerfectoNum()">(Es Perfecto No Perfecto )</button>
-                <h1>RESULTADO</h1>
-                <div id="resultado" class="mt-3"></div>
+                <!-- Resultado -->
+                <div class="mt-3">
+                    <h4 id="resultado" class="text-center"></h4>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Incluir jQuery y Bootstrap JS desde un CDN -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Incluir el archivo JavaScript -->
-    <script src="entero.js"></script>
 </body>
 </html>
