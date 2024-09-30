@@ -3,52 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Combinada</title>
+    <title>Mi Proyecto Universitario</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
-        .content {
-            background: white;
-            padding: 15px;
+        header {
+            background-color: #6a5acd;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #6a5acd;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .link-section {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #d3d3d3;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: #f0e68c;
         }
-        .info {
-            margin-bottom: 20px;
+        a {
+            color: #6a5acd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #6a5acd;
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <h1>Datos Personales</h1>
-    <div class="info">
-        <strong>Nombre:</strong> [Mel Amaya Noe] <br>
-        <strong>Universidad:</strong> [ Universidad Catolica Boliviana ] <br>
-        <strong>Asignatura:</strong> [Programacion 1] <br>
-        <strong>Carrera:</strong> [Ingenieria Industrial]
+<header>
+    <h1>Mi Proyecto Universitario</h1>
+    <p>Nombre: Mel Amaya</p>
+    <p>Universidad: UCB</p>
+    <p>Asignatura: Programacion 1</p>
+    <p>Carrera: Ingenieria Industrial </p>
+</header>
+
+<div class="container">
+    <h2>Contenido Integrado</h2>
+
+    <div class="link-section">
+        <h3>1. Enteros</h3>
+        <p>Aquí puedes ver información sobre enteros.</p>
+        <a href="http://amaya.somee.com/entero.html" target="_blank">Ver Enteros</a>
     </div>
 
-    <div class="content">
-        <h2>Contenido de Enteros</h2>
-        <iframe src="http://amaya.somee.com/entero.HTML" width="100%" height="400px"></iframe>
+    <div class="link-section">
+        <h3>2. Cadenas</h3>
+        <p>Aquí puedes ver información sobre cadenas.</p>
+        <a href="http://amaya.somee.com/cadenas.html" target="_blank">Ver Cadenas</a>
     </div>
 
-    <div class="content">
-        <h2>Contenido de Cadenas</h2>
-        <iframe src="http://amaya.somee.com/cadenas.html" width="100%" height="400px"></iframe>
+    <div class="link-section">
+        <h3>3. Lista de Enteros</h3>
+        <p>Aquí puedes ver información sobre listas de enteros.</p>
+        <a href="http://amaya.somee.com/lista%20enteros.HTML" target="_blank">Ver Lista de Enteros</a>
     </div>
 
-    <div class="content">
-        <h2>Lista de Enteros</h2>
-        <iframe src="http://amaya.somee.com/lista%20enteros.HTML" width="100%" height="400px"></iframe>
+    <div class="link-section">
+        <h3>4. Lista de Cadenas</h3>
+        <p>Aquí puedes ver información sobre listas de cadenas.</p>
+        <a href="http://amaya.somee.com/lista-cadenas.html" target="_blank">Ver Lista de Cadenas</a>
     </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Tu Nombre Aquí</p>
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Cadena</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ff5a47;
+            transform: translateY(-2px);
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista Cadena</h1>
+    <input type="text" id="inputValor" placeholder="Ingresa un valor" />
+    <br>
+    <button onclick="agregarValor()">Agregar</button>
+    <button onclick="eliminarValor()">Eliminar</button>
+    <button onclick="buscarValor()">Buscar</button>
+    <button onclick="ordenarLista()">Ordenar</button>
+    
+    <div id="resultado"></div>
+</div>
+
+<script>
+    class ListaCadena {
+        constructor() {
+            this.lista = [];
+        }
+
+        agregar(valor) {
+            this.lista.push(valor);
+        }
+
+        eliminar(valor) {
+            const index = this.lista.indexOf(valor);
+            if (index !== -1) {
+                this.lista.splice(index, 1);
+            }
+        }
+
+        buscar(valor) {
+            return this.lista.indexOf(valor);
+        }
+
+        ordenar() {
+            this.lista.sort((a, b) => a.localeCompare(b)); // Orden alfabético
+        }
+    }
+
+    const milista = new ListaCadena();
+
+    function agregarValor() {
+        const valor = document.getElementById('inputValor').value;
+        if (valor) {
+            milista.agregar(valor);
+            mostrarResultado();
+            document.getElementById('inputValor').value = ''; // Limpiar input
+        }
+    }
+
+    function eliminarValor() {
+        const valor = document.getElementById('inputValor').value;
+        if (valor) {
+            milista.eliminar(valor);
+            mostrarResultado();
+            document.getElementById('inputValor').value = ''; // Limpiar input
+        }
+    }
+
+    function buscarValor() {
+        const valor = document.getElementById('inputValor').value;
+        const resultado = milista.buscar(valor);
+        document.getElementById('resultado').innerText = 
+            resultado !== -1 ? `Encontrado en la posición: ${resultado}` : 'No encontrado';
+    }
+
+    function ordenarLista() {
+        milista.ordenar();
+        mostrarResultado();
+    }
+
+    function mostrarResultado() {
+        document.getElementById('resultado').innerText = 
+            `Lista: ${milista.lista.join(', ')}`;
+    }
+</script>
+
+</body>
+</html>
+
