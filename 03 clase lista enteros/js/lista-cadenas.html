@@ -70,71 +70,9 @@
     <button onclick="ordenarLista()">Ordenar</button>
     
     <div id="resultado"></div>
-</div>
+  </div>
 
-<script>
-    class ListaCadena {
-        constructor() {
-            this.lista = [];
-        }
-
-        agregar(valor) {
-            this.lista.push(valor);
-        }
-
-        eliminar(valor) {
-            const index = this.lista.indexOf(valor);
-            if (index !== -1) {
-                this.lista.splice(index, 1);
-            }
-        }
-
-        buscar(valor) {
-            return this.lista.indexOf(valor);
-        }
-
-        ordenar() {
-            this.lista.sort((a, b) => a.localeCompare(b)); // Orden alfabético
-        }
-    }
-
-    const milista = new ListaCadena();
-
-    function agregarValor() {
-        const valor = document.getElementById('inputValor').value;
-        if (valor) {
-            milista.agregar(valor);
-            mostrarResultado();
-            document.getElementById('inputValor').value = ''; // Limpiar input
-        }
-    }
-
-    function eliminarValor() {
-        const valor = document.getElementById('inputValor').value;
-        if (valor) {
-            milista.eliminar(valor);
-            mostrarResultado();
-            document.getElementById('inputValor').value = ''; // Limpiar input
-        }
-    }
-
-    function buscarValor() {
-        const valor = document.getElementById('inputValor').value;
-        const resultado = milista.buscar(valor);
-        document.getElementById('resultado').innerText = 
-            resultado !== -1 ? `Encontrado en la posición: ${resultado}` : 'No encontrado';
-    }
-
-    function ordenarLista() {
-        milista.ordenar();
-        mostrarResultado();
-    }
-
-    function mostrarResultado() {
-        document.getElementById('resultado').innerText = 
-            `Lista: ${milista.lista.join(', ')}`;
-    }
-</script>
+  <script defer src="lista-cadenas.js"></script>
 
 </body>
 </html>
