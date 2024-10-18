@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Shoot 2D</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            color: #d9d9d9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        h1 {
+            font-size: 60px;
+            color: #ff6b6b;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 4px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .highscore {
+            font-size: 26px;
+            color: #a6a6a6;
+            margin-bottom: 40px;
+        }
+        button {
+            background: linear-gradient(135deg, #ff6b6b, #ff3d3d);
+            border: none;
+            padding: 15px 40px;
+            font-size: 24px;
+            color: white;
+            text-transform: uppercase;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+        }
+        .footer {
+            margin-top: 60px;
+            font-size: 16px;
+            color: #666;
+        }
+        .version {
+            font-size: 18px;
+            color: #a6a6a6;
+            margin-bottom: 10px;
+        }
+        
+        /* Animaciones */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff3d3d;
+            }
+            to {
+                text-shadow: 0 0 20px #ff6b6b, 0 0 40px #ff6b6b, 0 0 60px #ff3d3d;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 40px;
+            }
+            button {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="highscore">PUNTAJE MÁS ALTO: 500</div>
+        <h1>TANK SHOOT 2D</h1>
+        <div class="version">Versión 1.003 (C) DarkSun Tech 2010-2019</div>
+        <button id="startGame" aria-label="Iniciar juego de un jugador">1P JUEGO</button>
+        <div class="footer">
+            <a href="http://www.tankshoot.com" style="color: #666; text-decoration: none;">www.tankshoot.com</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("startGame").addEventListener("click", function() {
+            alert("Iniciando el juego...");
+            // Aquí puedes iniciar el juego o redirigir a otra página
+            // window.location.href = "game.html";
+        });
+    </script>
+</body>
+</html>
