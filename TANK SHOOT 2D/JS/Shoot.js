@@ -1,21 +1,24 @@
-class shot {
+class Shoot{
     posX;
     posY;
     velocidad;
-    dirreccion ;
+    direccion;
 
-    constructor (_posX,_posY,_velovidad,_direccion ){
-        this.posX=_posX
-        this.posY=_posY
-        this.dirreccion=_direccion
-        this.velocidad=_velovidad
+    constructor(_posX, _posY, _velocidad, _direccion){
+        this.posX = _posX;
+        this.posY = _posY;
+        this.velocidad = _velocidad;
+        this.direccion= _direccion;
+        this.velocidad = _velocidad
+    }
+
+    actualizarPosicion(){
 
     }
-    actualizarPosicion (){
 
-    }
-    verificarPosicion (){
+    verificarColision(){
         
     }
+    
 
 }

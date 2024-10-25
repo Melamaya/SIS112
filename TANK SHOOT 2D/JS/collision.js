@@ -1,14 +1,16 @@
-class collision {
+class Collision{
     posX;
     posY;
-    direccion;
-    constructor(_posX,_posY,_direccion){
-        this.posX=_posX;
-        this.posY=_posY;
-        this.direccion=_direccion;
-    }
-    playanimacion () {
+    duracion;
+
+    constructor(_posX, _posY, _duracion){
+        this.posX = _posX;
+        this.posY = _posY;
+        this.duracion = _duracion
 
     }
-    
+    playAnimation(){
+        
+    }
+
 }

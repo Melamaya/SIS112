@@ -1,18 +1,21 @@
-class GameManager {
-    puntuacion ;
-    nivelactual ;
+class GameManager{
+    puntuacion;
+    nivelActual;
 
-    constructor(_puntuacion,_nivelactual){
-        this.puntuacion=_puntuacion
-        this.nivelactual=_nivelactual
+    constructor( _puntuacion, _nivelActual){
+        this.puntuacion = _puntuacion;
+        this.nivelActual = _nivelActual;
     }
+
     reiniciarNivel(){
 
     }
-    actualizarPosicion(){
+
+    actualizarPuntuacion(){
 
     }
-    siguienteNivel(){
 
+    siguienteNivel(){
+        
     }
 }
