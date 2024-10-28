@@ -1,14 +1,15 @@
 //seleccionamos el canvas y el contexto
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-
+var utilsOBJ= new Utils ();
 //Funcion para ajustar el tamaño del canvas a la ventana
 function resizeCanvas(){
     canvas.width = window.innerWidth * 0.9;
     canvas.height = window.innerHeight *0.9;
 
-    canvas.width = Math.round(canvas.width/50)*50;
-    canvas.height = Math.round(canvas.height/50)*50;
+    
+    canvas.width = utilsOBJ.RoundTablero(canvas.width);
+    canvas.height = utilsOBJ.RoundTablero(canvas.height);
 
     console.log('width',canvas.width)
     console.log('width',canvas.width)
@@ -24,12 +25,12 @@ window.addEventListener('resize', resizeCanvas);
 const game = new Game(canvas.width, canvas.height, "start");
 
 //creamos un tanque de jugador y un tanque de enemigo
-const playerTank = new Tank (100, 100, 'up', 3,game.ancho,game.alto );
+const playerTank = new Tank (100, 100, 'up', 3,game.ancho,game.alto ); // posicion del tanque 
 
-const enemyTank1 = new EnemyTank (500, 200, 'down',3, game.ancho, game.alto);
-const enemyTank2 = new EnemyTank (700, 400, 'down',3, game.ancho, game.alto);
-const enemyTank3 = new EnemyTank (300, 100, 'down',3, game.ancho, game.alto);
-const enemyTank4 = new EnemyTank (600, 600, 'down',3, game.ancho, game.alto);
+const enemyTank1 = new EnemyTank (500, 200, 'down',3, game.ancho, game.alto); // posicion del tanque 
+const enemyTank2 = new EnemyTank (700, 400, 'down',3, game.ancho, game.alto);   // posicion del tanque 
+const enemyTank3 = new EnemyTank (300, 100, 'down',3, game.ancho, game.alto);   // posicion del tanque 
+const enemyTank4 = new EnemyTank (600, 600, 'down',3, game.ancho, game.alto);   // posicion del tanque 
 
 //Dibujamos los elementos en el canvas
 function drawTank(tank){
@@ -99,13 +100,13 @@ function moveEnemyTankRandomly (enemyTank){
 setInterval (()=>{
     moveEnemyTankRandomly(enemyTank1);
     moveEnemyTankRandomly(enemyTank2);
-},500);  
+},500);  // velocidad con la que se mueve el tanque enemigo milesegundo 
 setInterval (()=>{
     moveEnemyTankRandomly(enemyTank3);
     moveEnemyTankRandomly(enemyTank4);
 
 
-},300);
+},300); // velocidad con la que se mueve el tanque enemigo milesegundo 
 
 //logica del juego (actualizacion de la pantalla)
 function updateGame(){

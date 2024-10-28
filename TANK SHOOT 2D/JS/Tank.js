@@ -1,4 +1,5 @@
 class Tank{
+    //crecion de variables 
     posX;
     posY;
     direccionDisparo;
@@ -19,7 +20,7 @@ class Tank{
     }
 
     moveLeft(){
-        if (this.posX - this.velocidad >= 0 ){
+        if (this.posX - this.velocidad >= 0 ){ 
             this.posX -= this.velocidad; 
         }
             

@@ -20,7 +20,7 @@ class EnemyTank{
 
     moveLeft(){
         if (this.posX - this.velocidad >= 0 ){
-            this.posX -= this.velocidad; 
+            this.posX -= this.velocidad;  
         }
             
 
