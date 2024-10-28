@@ -13,8 +13,8 @@ class Game{
         this.estadoJuego = _estadoJuego;
         var utilsOBJ = new Utils (); 
 
-        this.cantColumnas =13;
-        this.cantFilas =15;
+        this.cantColumnas =CANT_COLUMNAS;
+        this.cantFilas =CANT_FILAS;
         this.anchoCelda =utilsOBJ.Redondear(this.ancho/this.cantColumnas);
         this.altoCelda =utilsOBJ.Redondear(this.alto/this.cantFilas);
 

@@ -55,4 +55,12 @@ class Tank{
         this.direccionDisparo = _direccionDisparo;
 
     }
+
+    //Dibujamos los elementos en el canvas
+ drawTank(tank){
+    ctx.fillStyle = 'green';
+    //representamos el tanque como un cuadrado
+    ctx.fillRect(this.posX, this.posY, 50, 50);
+ }
+
 }
