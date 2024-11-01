@@ -142,18 +142,104 @@ function drawEscenario (ctx, escenario){
     }
 }
 
+function drawEscenario(ctx,escenario){
+
+}
+//13*15
+//fondo =0 //negro
+// pared =1 // cafe
+//
+
+const mapa = [ 
+    [ 1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [ 1,2,1,1,1,1,1,1,1,2,2,2,2],
+    [ 1,2,1,1,0,2,2,2,0,1,2,2,2],
+    [ 1,2,1,1,2,2,2,2,2,1,1,2,2],
+    [ 1,2,1,1,0,2,2,2,0,1,2,2,1],
+    [ 1,1,1,2,0,0,0,0,0,0,1,1,1],
+    [ 1,1,1,2,2,2,2,0,0,2,2,1,1],
+    [ 1,2,1,2,1,2,2,2,1,1,1,2,1],
+    [ 1,2,1,2,1,1,1,1,1,2,1,2,1],
+    [ 1,2,1,2,1,2,2,1,1,1,2,2,1],
+    [ 1,1,1,1,1,2,2,1,1,1,1,1,1]
+];
+const mapa 2 = [ 
+    [ 1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,2,1,2,1,2,2,2,1,2,1,2,1],
+    [ 1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [ 1,2,1,1,1,1,1,1,1,2,2,2,2],
+    [ 1,2,1,1,0,2,2,2,0,1,2,2,2],
+    [ 1,2,1,1,2,2,2,2,2,1,1,2,2],
+    [ 1,2,1,1,0,2,2,2,0,1,2,2,1],
+    [ 1,1,1,2,0,0,0,0,0,0,1,1,1],
+    [ 1,1,1,2,2,2,2,0,0,2,2,1,1],
+    [ 1,2,1,2,1,2,2,2,1,1,1,2,1],
+    [ 1,2,2,2,2,2,2,2,2,2,1,2,1],
+    [ 1,2,2,2,2,2,2,2,2,2,2,2,1],
+    [ 1,1,1,1,1,2,2,1,1,1,1,1,1]
+];
+function DibujaCero (ctx,x,y,x1,y1){
+    ctx.fillStyle ="white ";
+    ctx.fillRect(x,y,x1,y1);
+
+}
+function DibujaUno (ctx,x,y,x1,y1){
+    ctx.fillStyle ="#17A589";
+    ctx.fillRect(x,y,x1,y1);
+
+}
+function DibujaDos (ctx,x,y,x1,y1){
+    ctx.fillStyle ="#9FE2BF";
+    ctx.fillRect(x,y,x1,y1);
+
+}
+function DibujarMapa(ctx,mapa){
+    console.log("entro")
+    for (let row = 0; row < mapa.length; row++) {
+        for (let col = 0; col < mapa[ row].length; col++) {
+
+            const cell = mapa[row][col];
+            const x = col *game.anchoCelda;
+            const y = row * game.altoCelda;
+            switch(cell){
+                case 0:
+                    DibujaCero (ctx,x,y,game.anchoCelda,game.altoCelda);
+                    break ;
+                case 1:
+                    DibujaUno (ctx,x,y,game.anchoCelda,game.altoCelda);
+                    break ;
+                case 2:
+                    DibujaDos (ctx,x,y,game.anchoCelda,game.altoCelda);
+                    break ;
+                default:
+                    break;
+
+            }
+
+        }
+    }
+}
+
+
 //logica del juego (actualizacion de la pantalla)
 function updateGame(){
     //limpiamos el canvas en cada frame
     ctx.clearRect(0,0, canvas.width, canvas.height);
 
-    drawEscenario(ctx,escenario); //dibujamos el escenario 
-    playerTank.drawTank(ctx);
+    //drawEscenario(ctx,escenario); //dibujamos el escenario 
+    DibujarMapa(ctx,mapa);
+    //playerTank.drawTank(ctx);
 
-    enemyTank1.drawEnemyTank(ctx)
-    enemyTank2.drawEnemyTank(ctx)
-    enemyTank3.drawEnemyTank(ctx)
-    enemyTank4.drawEnemyTank(ctx)
+    //enemyTank1.drawEnemyTank(ctx)
+ // enemyTank2.drawEnemyTank(ctx)
+    //enemyTank3.drawEnemyTank(ctx)
+    //enemyTank4.drawEnemyTank(ctx)
     
     
 
