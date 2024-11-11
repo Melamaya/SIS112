@@ -228,6 +228,63 @@ class Matriz {
         // Después de llenar la matriz con el patrón en diagonal inversa, la dibujamos
         this.dibujarMatriz();
     }
+    llenarMatrizSecuencia_0_al_7(){
+        var puntero =0 ;
+        for(let  i=0 ; i < this.filas; i++) {
+            for(let j=0 ;j < this.columnas;j++){
+            this.matriz[i][j]=puntero;
+            if (puntero ==7){
+                puntero=-1;
+            }
+            puntero =puntero+1;
+            }
+        }
+        this.dibujarMatriz();
+    }
+    llenarMatrizSecuencia3(){
+        this.vaciarMatriz();
+        var puntero =7 ;
+        for(let i = 0 ; i < this.filas; i++) {
+            for(let j = 0 ;j < this.columnas; j++) {
+                this.matriz[i][j] = puntero;
+                if (puntero == 0){
+                    puntero= 8;
+                }
+                puntero = puntero - 1;
+            }
+        }
+        this.dibujarMatriz();
+    }
+    llenarMatrizSecuencia4(){
+        this.vaciarMatriz();
+        var intercambio ="disminuir";
+        var puntero =7 ;
+        for(let i = 0 ; i < this.filas; i++) {
+            for(let j = 0 ;j < this.columnas; j++) {
+                this.matriz[i][j] = puntero;
+                //////////////
+                if (intercambio == "disminuir"){
+                    if (puntero == 0){
+                        intercambio="incrementar"
+                    }
+                    puntero = puntero - 1;   
+                }
+                ////
+                if (intercambio == "incrementar"){  
+                    if (puntero ==7 ) {
+                        puntero = puntero - 1; 
+                        intercambio="disminuir"
+                    }
+                    puntero = puntero + 1; 
+                }
+                
+
+            }
+        }
+        this.dibujarMatriz();
+    }
+    
+
 
     // Método para dibujar la matriz en el canvas
     dibujarMatriz() {
@@ -252,9 +309,25 @@ class Matriz {
             case 2:
                 this.DibujarDos(x, y, this.anchoCelda, this.altoCelda);
                 break;
+            case 3:
+                this.DibujarTres(x, y, this.anchoCelda, this.altoCelda);
+                break;
+            case 4:
+                this.DibujarCuatro(x, y, this.anchoCelda, this.altoCelda);
+                break;
+            case 5:
+                this.DibujarCinco(x, y, this.anchoCelda, this.altoCelda);
+                break;
+            case 6:
+                this.DibujarSeis(x, y, this.anchoCelda, this.altoCelda);
+                break;
+            case 7:
+                this.DibujarSiete(x, y, this.anchoCelda, this.altoCelda);
+                break;
             default:
                 console.warn(`Valor desconocido en la matriz: ${valor}`);
                 break;
+
         }
     }
 
@@ -295,4 +368,62 @@ class Matriz {
         this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
         this.ctx.fillText("2", x + ancho / 2, y + alto / 2);
     }
+    DibujarTres(x, y, ancho, alto) {
+        this.ctx.fillStyle = "50aa69"; // Color para valor 2
+        this.ctx.fillRect(x, y, ancho, alto);
+        this.ctx.strokeStyle = "#50aa69";
+        this.ctx.strokeRect(x, y, ancho, alto);
+        this.ctx.font = "bold 20px Arial"; // Ajustar la fuente y tamaño
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
+        this.ctx.fillText("3", x + ancho / 2, y + alto / 2);
+    }
+    DibujarCuatro(x, y, ancho, alto) {
+        this.ctx.fillStyle = "#6ca6b2"; // Color para valor 2
+        this.ctx.fillRect(x, y, ancho, alto);
+        this.ctx.strokeStyle = "#6ca6b2";
+        this.ctx.strokeRect(x, y, ancho, alto);
+        this.ctx.font = "bold 20px Arial"; // Ajustar la fuente y tamaño
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
+        this.ctx.fillText("4", x + ancho / 2, y + alto / 2);
+    }
+    DibujarCinco(x, y, ancho, alto) {
+        this.ctx.fillStyle = "#1d3235"; // Color para valor 2
+        this.ctx.fillRect(x, y, ancho, alto);
+        this.ctx.strokeStyle = "#1d3235";
+        this.ctx.strokeRect(x, y, ancho, alto);
+        this.ctx.font = "bold 20px Arial"; // Ajustar la fuente y tamaño
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
+        this.ctx.fillText("5", x + ancho / 2, y + alto / 2);
+    }
+    DibujarSeis(x, y, ancho, alto) {
+        this.ctx.fillStyle = "#5c9da6"; // Color para valor 2
+        this.ctx.fillRect(x, y, ancho, alto);
+        this.ctx.strokeStyle = "#5c9da6";
+        this.ctx.strokeRect(x, y, ancho, alto);
+        this.ctx.font = "bold 20px Arial"; // Ajustar la fuente y tamaño
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
+        this.ctx.fillText("6", x + ancho / 2, y + alto / 2);
+    }
+    DibujarSiete(x, y, ancho, alto) {
+        this.ctx.fillStyle = "#a65c78"; // Color para valor 2
+        this.ctx.fillRect(x, y, ancho, alto);
+        this.ctx.strokeStyle = "#a65c78";
+        this.ctx.strokeRect(x, y, ancho, alto);
+        this.ctx.font = "bold 20px Arial"; // Ajustar la fuente y tamaño
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "#fff"; // Color del texto (blanco)
+        this.ctx.fillText("7", x + ancho / 2, y + alto / 2);
+    }
+    
 }
+
+
