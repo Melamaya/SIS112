@@ -504,6 +504,7 @@ class Matriz {
         // Dibujar la matriz en el canvas
         this.dibujarMatriz();
     }
+    //EJERCICIO 11
     Cuadricula() {
         // Recorremos cada fila de la matriz
         for (let i = 0; i < this.filas; i++) {
@@ -544,6 +545,7 @@ class Matriz {
     
         this.dibujarMatriz();
     }
+    //EJERCICIO 13
     RombosCentricos() {
         this.vaciarMatriz();
       // Definir el tamaño de la matriz
@@ -578,6 +580,7 @@ class Matriz {
 
     this.dibujarMatriz();
 }
+//EJERCICIO 14
 CrucesCentricas() {
     this.vaciarMatriz();
     for (let i = 0; i < this.filas - 1; i++) { // Excluir la última fila
