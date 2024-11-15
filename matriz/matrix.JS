@@ -855,7 +855,7 @@ RelojdeArena() {
 
     // Métodos para dibujar cada tipo de celda con un color específico
     DibujarCero(x, y, ancho, alto) {
-        this.ctx.fillStyle = "#2c3e50"; // Color para valor 0
+        this.ctx.fillStyle = "#2bb394"; // Color para valor 0
         this.ctx.fillRect(x, y, ancho, alto);
         this.ctx.strokeStyle = "#ecf0f1";
         this.ctx.strokeRect(x, y, ancho, alto);
@@ -868,7 +868,7 @@ RelojdeArena() {
     }
 
     DibujarUno(x, y, ancho, alto) {
-        this.ctx.fillStyle = "#8e44ad"; // Color para valor 1
+        this.ctx.fillStyle = "#2ba5b3"; // Color para valor 1
         this.ctx.fillRect(x, y, ancho, alto);
         this.ctx.strokeStyle = "#ecf0f1";
         this.ctx.strokeRect(x, y, ancho, alto);
@@ -880,7 +880,7 @@ RelojdeArena() {
     }
 
     DibujarDos(x, y, ancho, alto) {
-        this.ctx.fillStyle = "#e74c3c"; // Color para valor 2
+        this.ctx.fillStyle = "#5db32b"; // Color para valor 2
         this.ctx.fillRect(x, y, ancho, alto);
         this.ctx.strokeStyle = "#ecf0f1";
         this.ctx.strokeRect(x, y, ancho, alto);
