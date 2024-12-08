@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Snake Game - Clásico juego de la serpiente en 2D. Come las frutas y crece tu puntuación.">
-    <title>Snake Game</title>
+    <meta name="description" content="Juego de la Serpiente 2D - Clásico juego de la serpiente.">
+    <title>Juego de la Serpiente</title>
     <style>
+        /* Diseño general del cuerpo */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,59 +14,59 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #8bc34a; /* Fondo verde claro */
+            background-color: #4CAF50; /* Fondo verde */
+            height: 100vh;
+            justify-content: center;
         }
 
-        header {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        header h1 {
+        /* Título del juego */
+        h1 {
             font-size: 3rem;
-            color: #1b5e20; /* Verde oscuro */
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            color: #ffffff; /* Blanco */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 10px;
         }
 
+        /* Contenedor del canvas */
         .game-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
-            background-color: #dcedc8; /* Fondo del contenedor */
-            padding: 20px;
+            background-color: #81C784; /* Verde suave */
+            border: 10px solid #388E3C; /* Verde más oscuro */
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra */
         }
 
+        /* Estilo del canvas */
         canvas {
-            background-color: #aed581; /* Fondo verde suave */
-            background-image: linear-gradient(45deg, #c5e1a5 25%, transparent 25%, transparent 75%, #c5e1a5 75%, #c5e1a5),
-                              linear-gradient(45deg, #c5e1a5 25%, transparent 25%, transparent 75%, #c5e1a5 75%, #c5e1a5);
-            background-size: 40px 40px;
+            background-color: #AED581; /* Fondo del canvas */
+            background-image: linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5),
+                              linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5);
+            background-size: 40px 40px; /* Tamaño del patrón */
             background-position: 0 0, 20px 20px;
-            border: 4px solid #558b2f; /* Bordes oscuros */
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 5px solid #558B2F; /* Bordes oscuros */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Sombra */
         }
 
+        /* Puntaje */
         #score {
             font-size: 1.5rem;
-            color: #33691e;
+            color: #ffffff;
             margin-top: 10px;
-            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
+        /* Estilo para el pie de página */
         footer {
             margin-top: 20px;
-            text-align: center;
             font-size: 0.9rem;
-            color: #558b2f;
+            color: #ffffff;
         }
 
         footer a {
-            color: #388e3c;
+            color: #FFEB3B;
             text-decoration: none;
         }
 
@@ -75,21 +76,18 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Snake Game</h1>
-        <p>¡Come las frutas y crece tanto como puedas!</p>
-    </header>
-
+    <h1>Juego de la Serpiente</h1>
     <div class="game-container">
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <canvas id="Canvas" width="400" height="400"></canvas>
         <p id="score">Puntaje: 0</p>
     </div>
-
     <footer>
-        <p>Desarrollado por <a href="#">[Tu Nombre]</a></p>
+        <p>Desarrollado por <a href="#">[Michelle Womberk y Mel Amaya]</a></p>
     </footer>
 
-    <!-- Enlace al archivo externo de JavaScript -->
-    <script src="serpiente.js"></script>
+</footer>
+
+<script src="js/serpiente.js"></script>
 </body>
 </html>
+ 
