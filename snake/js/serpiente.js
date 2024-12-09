@@ -8,10 +8,9 @@ var food = {};
 var lastDirection = direction;
 var score = 0;
 
-// Cargar los sonidos
-var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); // Asegúrate de que la ruta sea correcta
-var gameOverSound = new Audio('sonido/game_over.mp3');  // Asegúrate de que la ruta sea correcta
 
+// Cargar los sonidos
+var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); 
 // Inicializa el juego
 function init() {
     spawnFood();  // Genera la comida
