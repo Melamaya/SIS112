@@ -3,125 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake 2D - Inicio</title>
+    <meta name="description" content="Juego de la Serpiente 2D - Clásico juego de la serpiente.">
+    <title>Juego de la Serpiente</title>
     <style>
-        /* Estilos básicos para el cuerpo */
-        body, html {
+        /* Diseño general del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif; /* Letra futurista */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            background: linear-gradient(180deg, #1e1e1e, #3d3d3d); /* Fondo más suave */
-            color: #ffffff;
-        }
-
-        /* Contenedor principal */
-        #game-container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 2s ease-out;
+            background-color: #4CAF50; /* Fondo verde */
+            height: 100vh;
+            justify-content: center;
         }
 
         /* Título del juego */
         h1 {
-            font-size: 4em;
-            margin-bottom: 30px;
-            color: #4caf50; /* Verde que recuerda al tema Snake */
-            text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50, 0 0 40px #4caf50;
-            animation: glow 2s infinite alternate;
+            font-size: 3rem;
+            color: #ffffff; /* Blanco */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 10px;
         }
 
-        /* Botón de inicio */
-        .start-btn {
-            font-size: 1.5em;
-            padding: 15px 40px;
-            color: white;
-            background: linear-gradient(45deg, #2d2d2d, #4caf50);
-            border: 3px solid #4caf50;
+        /* Contenedor del canvas */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #81C784; /* Verde suave */
+            border: 10px solid #388E3C; /* Verde más oscuro */
             border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #4caf50, inset 0 0 10px rgba(0, 0, 0, 0.8);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra */
         }
 
-        /* Efectos al pasar el mouse */
-        .start-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #4caf50, inset 0 0 15px #4caf50;
+        /* Estilo del canvas */
+        canvas {
+            background-color: #AED581; /* Fondo del canvas */
+            background-image: linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5),
+                              linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5);
+            background-size: 40px 40px; /* Tamaño del patrón */
+            background-position: 0 0, 20px 20px;
+            border: 5px solid #558B2F; /* Bordes oscuros */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Sombra */
         }
 
-        /* Créditos */
-        .credits {
+        /* Puntaje */
+        #score {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-top: 10px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilo para el pie de página */
+        footer {
             margin-top: 20px;
-            font-size: 1em;
-            color: #bbbbbb;
+            font-size: 0.9rem;
+            color: #ffffff;
         }
 
-        .credits span {
-            color: #4caf50;
+        footer a {
+            color: #FFEB3B;
+            text-decoration: none;
         }
 
-        /* Animación de partículas */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: url('snake-particles.svg') repeat;
-            animation: moveParticles 10s linear infinite;
-        }
-
-        /* Animaciones */
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
-            }
-            to {
-                text-shadow: 0 0 30px #4caf50, 0 0 50px #4caf50;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes moveParticles {
-            from { background-position: 0 0; }
-            to { background-position: 0 100%; }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Fondo animado -->
-    <div class="particles"></div>
-
-    <!-- Contenedor principal -->
-    <div id="game-container">
-        <h1>SNAKE 2D</h1>
-        <button class="start-btn" onclick="startGame()">Jugar</button>
-        <div class="credits">Desarrollado por <span>equipo Snake 2D</span></div>
+    <h1>Juego de la Serpiente</h1>
+    <div class="game-container">
+        <canvas id="Canvas" width="400" height="400"></canvas>
+        <p id="score">Puntaje: 0</p>
     </div>
+    <footer>
+        <p>Desarrollado por <a href="#">[Tu Nombre]</a></p>
+    </footer>
 
-    <!-- Script para iniciar el juego -->
     <script>
-        function startGame() {
-            // Reproduce un sonido (opcional)
-            const audio = new Audio('button-click.mp3'); // Agrega este archivo si lo necesitas
-            audio.play();
+        // Variables iniciales
+        var canvas = document.getElementById("Canvas");
+        var ctx = canvas.getContext("2d");
+        var fps = 5;  // Velocidad del juego
+        var BLOCK_SIZE = 20;
+        var snake = [{ x: 100, y: 100 }];
+        var direction = "Right";
+        var food = {};
+        var lastDirection = direction;
+        var score = 0;
 
-            // Redirige al archivo snake.html
-            setTimeout(() => {
-                window.location.href = 'snake.html';
-            }, 300); // Pequeño retraso para el efecto
+        // Añadir sonido de comer
+        var eatSound = new Audio('assets_apple-crunch-16.wav'); // Archivo proporcionado
+
+        // Iniciar el juego
+        function init() {
+            spawnFood();
+            document.addEventListener("keydown", handleKeyInput);
+            setInterval(update, 1000 / fps);
         }
+
+        // Manejar las teclas de dirección
+        function handleKeyInput(event) {
+            var key = event.key;
+            if ((key === "ArrowUp" || key === "w") && lastDirection !== "Down") {
+                direction = "Up";
+            } else if ((key === "ArrowDown" || key === "s") && lastDirection !== "Up") {
+                direction = "Down";
+            } else if ((key === "ArrowLeft" || key === "a") && lastDirection !== "Right") {
+                direction = "Left";
+            } else if ((key === "ArrowRight" || key === "d") && lastDirection !== "Left") {
+                direction = "Right";
+            }
+        }
+
+        // Actualizar el juego
+        function update() {
+            var head = { ...snake[0] }; // Nueva posición de la cabeza
+
+            // Mover la serpiente en la dirección actual
+            if (direction === "Up") {
+                head.y -= BLOCK_SIZE;
+            } else if (direction === "Down") {
+                head.y += BLOCK_SIZE;
+            } else if (direction === "Left") {
+                head.x -= BLOCK_SIZE;
+            } else if (direction === "Right") {
+                head.x += BLOCK_SIZE;
+            }
+
+            // Colisiones con los bordes o con la serpiente
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
+                alert("¡Game Over! Puntaje final: " + score);
+                resetGame();
+                return;
+            }
+
+            snake.unshift(head); // Añadir nueva cabeza
+
+            // Comprobar si la serpiente ha comido la comida
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                updateScore();
+                eatSound.play(); // Reproducir sonido de comer
+                spawnFood();
+            } else {
+                snake.pop(); // Eliminar la cola si no come
+            }
+
+            lastDirection = direction;
+            draw();
+        }
+
+        // Dibujar la serpiente y la comida
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar la serpiente
+            ctx.fillStyle = "#2196F3"; // Azul
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);
+            });
+
+            // Dibujar la comida
+            ctx.fillStyle = "#FF5252"; // Rojo
+            ctx.fillRect(food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
+        }
+
+        // Actualizar el puntaje
+        function updateScore() {
+            document.getElementById("score").innerText = Puntaje: ${score};
+        }
+
+        // Generar comida en una posición aleatoria
+        function spawnFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width / BLOCK_SIZE)) * BLOCK_SIZE,
+                y: Math.floor(Math.random() * (canvas.height / BLOCK_SIZE)) * BLOCK_SIZE
+            };
+        }
+
+        // Verificar colisión de la cabeza con el cuerpo
+        function collision(head) {
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Reiniciar el juego
+        function resetGame() {
+            snake = [{ x: 100, y: 100 }];
+            direction = "Right";
+            lastDirection = direction;
+            score = 0;
+            updateScore();
+            spawnFood();
+        }
+
+        // Iniciar el juego
+        init();
     </script>
 </body>
-</html>
+</html>>

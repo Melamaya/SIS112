@@ -8,6 +8,10 @@ var food = {};
 var lastDirection = direction;
 var score = 0;
 
+// Cargar los sonidos
+var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); // Asegúrate de que la ruta sea correcta
+
+
 // Inicializa el juego
 function init() {
     spawnFood();  // Genera la comida
@@ -48,6 +52,7 @@ function update() {
 
     // Si la serpiente colisiona con las paredes, termina el juego
     if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
+        gameOverSound.play(); // Reproducir sonido de Game Over
         alert("Game Over! Puntaje: " + score);
         resetGame();
         return;
@@ -60,6 +65,7 @@ function update() {
     if (head.x === food.x && head.y === food.y) {
         score++;
         spawnFood();  // Generar nueva comida
+        eatSound.play(); // Reproducir sonido al comer
     } else {
         snake.pop();  // Eliminar la cola de la serpiente
     }

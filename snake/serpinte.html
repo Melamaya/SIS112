@@ -3,125 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake 2D - Inicio</title>
+    <title>Snake Game - Tablero de Ajedrez</title>
     <style>
-        /* Estilos básicos para el cuerpo */
+        /* Estilos generales */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif; /* Letra futurista */
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(180deg, #1e1e1e, #3d3d3d); /* Fondo más suave */
-            color: #ffffff;
+            background-color: #4CAF50; /* Verde base */
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Contenedor principal */
-        #game-container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 2s ease-out;
-        }
-
-        /* Título del juego */
-        h1 {
-            font-size: 4em;
-            margin-bottom: 30px;
-            color: #4caf50; /* Verde que recuerda al tema Snake */
-            text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50, 0 0 40px #4caf50;
-            animation: glow 2s infinite alternate;
-        }
-
-        /* Botón de inicio */
-        .start-btn {
-            font-size: 1.5em;
-            padding: 15px 40px;
-            color: white;
-            background: linear-gradient(45deg, #2d2d2d, #4caf50);
-            border: 3px solid #4caf50;
-            border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #4caf50, inset 0 0 10px rgba(0, 0, 0, 0.8);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Efectos al pasar el mouse */
-        .start-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #4caf50, inset 0 0 15px #4caf50;
-        }
-
-        /* Créditos */
-        .credits {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #bbbbbb;
-        }
-
-        .credits span {
-            color: #4caf50;
-        }
-
-        /* Animación de partículas */
-        .particles {
+        /* Tablero de ajedrez */
+        .chessboard {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            background: url('snake-particles.svg') repeat;
-            animation: moveParticles 10s linear infinite;
+            display: grid;
+            grid-template-columns: repeat(20, 5vw); /* 20 columnas con 5vw cada una */
+            grid-template-rows: repeat(20, 5vw);    /* 20 filas con 5vw cada una */
         }
 
-        /* Animaciones */
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50;
-            }
-            to {
-                text-shadow: 0 0 30px #4caf50, 0 0 50px #4caf50;
-            }
+        .cell {
+            width: 5vw;
+            height: 5vw;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .cell:nth-child(odd) {
+            background-color: #006400; /* Verde oscuro */
         }
 
-        @keyframes moveParticles {
-            from { background-position: 0 0; }
-            to { background-position: 0 100%; }
+        .cell:nth-child(even) {
+            background-color: #a0d995; /* Verde claro */
+        }
+
+        /* Serpiente */
+        .snake-block {
+            position: absolute;
+            width: 5vw; /* Tamaño ajustado */
+            height: 5vw;
+            background-color: #2196F3; /* Azul brillante */
+            border-radius: 5px;
+        }
+
+        /* Manzana */
+        .apple {
+            position: absolute;
+            width: 5vw; /* Tamaño ajustado */
+            height: 5vw;
+            background-color: #FF5252; /* Rojo brillante */
+            border-radius: 50%; /* Forma circular */
+        }
+
+        /* Contenedor de título y botón */
+        .game-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(0, 128, 0, 0.9); /* Fondo translúcido */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0aff0a, 0 0 20px #0aff0a;
+        }
+
+        .start-btn {
+            font-size: 1.2rem;
+            padding: 10px 40px;
+            color: #ffffff;
+            background-color: #0aff0a;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px #0aff0a, inset 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px #0aff0a, inset 0 0 15px #0aff0a;
+        }
+
+        .credits {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .credits span {
+            color: #0aff0a;
         }
     </style>
 </head>
 <body>
-    <!-- Fondo animado -->
-    <div class="particles"></div>
-
-    <!-- Contenedor principal -->
-    <div id="game-container">
-        <h1>SNAKE 2D</h1>
-        <button class="start-btn" onclick="startGame()">Jugar</button>
-        <div class="credits">Desarrollado por <span>equipo Snake 2D</span></div>
+    <!-- Tablero de ajedrez -->
+    <div class="chessboard">
+        <!-- Celdas del tablero -->
+        <script>
+            const chessboard = document.querySelector('.chessboard');
+            for (let row = 0; row < 20; row++) {
+                for (let col = 0; col < 20; col++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    if ((row + col) % 2 === 0) {
+                        cell.style.backgroundColor = '#006400'; /* Verde oscuro */
+                    } else {
+                        cell.style.backgroundColor = '#a0d995'; /* Verde claro */
+                    }
+                    chessboard.appendChild(cell);
+                }
+            }
+        </script>
     </div>
 
-    <!-- Script para iniciar el juego -->
+    <!-- Serpiente y manzana -->
+    <div class="snake-block" style="top: 15vw; left: 15vw;"></div>
+    <div class="snake-block" style="top: 15vw; left: 20vw;"></div>
+    <div class="snake-block" style="top: 15vw; left: 25vw;"></div>
+    <div class="apple" style="top: 25vw; left: 30vw;"></div>
+
+    <!-- Contenedor del título y botón -->
+    <div class="game-container">
+        <h1 class="title">Snake Game</h1>
+        <button class="start-btn" onclick="startGame()">Jugar</button>
+        
+    </div>
+
     <script>
         function startGame() {
-            // Reproduce un sonido (opcional)
-            const audio = new Audio('button-click.mp3'); // Agrega este archivo si lo necesitas
-            audio.play();
-
-            // Redirige al archivo snake.html
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 300); // Pequeño retraso para el efecto
+            window.location.href = 'index.html'; 
         }
     </script>
 </body>
 </html>
+
+
+

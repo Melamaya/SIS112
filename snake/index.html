@@ -82,12 +82,134 @@
         <p id="score">Puntaje: 0</p>
     </div>
     <footer>
-        <p>Desarrollado por <a href="#">[Michelle Womberk y Mel Amaya]</a></p>
+        <p>Desarrollado por <a href="#">[Tu Nombre]</a></p>
     </footer>
 
-</footer>
+    <script>
+        // Variables iniciales
+        var canvas = document.getElementById("Canvas");
+        var ctx = canvas.getContext("2d");
+        var fps = 5;  // Velocidad del juego
+        var BLOCK_SIZE = 20;
+        var snake = [{ x: 100, y: 100 }];
+        var direction = "Right";
+        var food = {};
+        var lastDirection = direction;
+        var score = 0;
 
-<script src="js/serpiente.js"></script>
+        // Añadir sonido de comer
+        var eatSound = new Audio('assets_apple-crunch-16.wav'); // Archivo proporcionado
+
+        // Iniciar el juego
+        function init() {
+            spawnFood();
+            document.addEventListener("keydown", handleKeyInput);
+            setInterval(update, 1000 / fps);
+        }
+
+        // Manejar las teclas de dirección
+        function handleKeyInput(event) {
+            var key = event.key;
+            if ((key === "ArrowUp" || key === "w") && lastDirection !== "Down") {
+                direction = "Up";
+            } else if ((key === "ArrowDown" || key === "s") && lastDirection !== "Up") {
+                direction = "Down";
+            } else if ((key === "ArrowLeft" || key === "a") && lastDirection !== "Right") {
+                direction = "Left";
+            } else if ((key === "ArrowRight" || key === "d") && lastDirection !== "Left") {
+                direction = "Right";
+            }
+        }
+
+        // Actualizar el juego
+        function update() {
+            var head = { ...snake[0] }; // Nueva posición de la cabeza
+
+            // Mover la serpiente en la dirección actual
+            if (direction === "Up") {
+                head.y -= BLOCK_SIZE;
+            } else if (direction === "Down") {
+                head.y += BLOCK_SIZE;
+            } else if (direction === "Left") {
+                head.x -= BLOCK_SIZE;
+            } else if (direction === "Right") {
+                head.x += BLOCK_SIZE;
+            }
+
+            // Colisiones con los bordes o con la serpiente
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
+                alert("¡Game Over! Puntaje final: " + score);
+                resetGame();
+                return;
+            }
+
+            snake.unshift(head); // Añadir nueva cabeza
+
+            // Comprobar si la serpiente ha comido la comida
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                updateScore();
+                eatSound.play(); // Reproducir sonido de comer
+                spawnFood();
+            } else {
+                snake.pop(); // Eliminar la cola si no come
+            }
+
+            lastDirection = direction;
+            draw();
+        }
+
+        // Dibujar la serpiente y la comida
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar la serpiente
+            ctx.fillStyle = "#2196F3"; // Azul
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);
+            });
+
+            // Dibujar la comida
+            ctx.fillStyle = "#FF5252"; // Rojo
+            ctx.fillRect(food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
+        }
+
+        // Actualizar el puntaje
+        function updateScore() {
+            document.getElementById("score").innerText = 'Puntaje: ' + score;
+        }
+
+
+        // Generar comida en una posición aleatoria
+        function spawnFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width / BLOCK_SIZE)) * BLOCK_SIZE,
+                y: Math.floor(Math.random() * (canvas.height / BLOCK_SIZE)) * BLOCK_SIZE
+            };
+        }
+
+        // Verificar colisión de la cabeza con el cuerpo
+        function collision(head) {
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Reiniciar el juego
+        function resetGame() {
+            snake = [{ x: 100, y: 100 }];
+            direction = "Right";
+            lastDirection = direction;
+            score = 0;
+            updateScore();
+            spawnFood();
+        }
+
+        // Iniciar el juego
+        init();
+    </script>
 </body>
 </html>
- 
