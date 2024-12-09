@@ -1,6 +1,6 @@
 var canvas = document.getElementById("Canvas");
 var ctx = canvas.getContext("2d");
-var fps = 2;  // Ajusta el FPS para hacer el juego más lento
+var fps = 0;  // Ajusta el FPS para hacer el juego más lento
 var BLOCK_SIZE = 20;
 var snake = [{x: 100, y: 100}];
 var direction = "Right";

@@ -6,7 +6,6 @@
     <meta name="description" content="Juego de la Serpiente 2D - Clásico juego de la serpiente.">
     <title>Juego de la Serpiente</title>
     <style>
-        /* Diseño general del cuerpo */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,43 +13,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #388E3C; /* Fondo verde */
+            background-color: #388E3C;
             height: 100vh;
             justify-content: center;
         }
 
-        /* Título del juego */
         h1 {
             font-size: 3rem;
-            color: #ffffff; /* Blanco */
+            color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
             margin-bottom: 10px;
         }
 
-        /* Contenedor del canvas */
         .game-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #81C784; /* Verde suave */
-            border: 10px solid #388E3C; /* Verde más oscuro */
+            background-color: #81C784;
+            border: 10px solid #388E3C;
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
-        /* Estilo del canvas */
         canvas {
-            background-color: #AED581; /* Fondo del canvas */
+            background-color: #AED581;
             background-image: linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5),
                               linear-gradient(45deg, #C5E1A5 25%, transparent 25%, transparent 75%, #C5E1A5 75%, #C5E1A5);
-            background-size: 40px 40px; /* Tamaño del patrón */
+            background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
-            border: 5px solid #558B2F; /* Bordes oscuros */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Sombra */
+            border: 5px solid #558B2F;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* Puntaje */
         #score {
             font-size: 1.5rem;
             color: #ffffff;
@@ -58,7 +53,6 @@
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Estilo para el pie de página */
         footer {
             margin-top: 20px;
             font-size: 0.9rem;
@@ -86,159 +80,128 @@
     </footer>
 
     <script>
-        // Variables iniciales
-        var canvas = document.getElementById("Canvas");
-        var ctx = canvas.getContext("2d");
-        var fps = 5;  // Velocidad del juego
-        var BLOCK_SIZE = 20;
-        var snake = [{ x: 100, y: 100 }]; // Cabeza de la serpiente
-        var direction = "Right";
-        var food = {};
-        var lastDirection = direction;
-        var score = 0;
-
-        // Añadir sonido de comer
-        var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); 
+        const canvas = document.getElementById("Canvas");
+        const ctx = canvas.getContext("2d");
+        const fps = 5; // Velocidad del juego
+        const BLOCK_SIZE = 20;
+        let snake = [{ x: 100, y: 100 }];
+        let direction = "Right";
+        let food = {};
+        let score = 0;
 
         // Cargar las imágenes
-        var snakeHeadImg = new Image();
-        snakeHeadImg.src = 'imagenes/cabeza serpinte.png';  // Imagen de la cabeza de la serpiente
-
-        var appleImg = new Image();
+        const snakeHeadImg = new Image();
+        snakeHeadImg.src = 'imagenes/cabeza.webp'; // Imagen de la cabeza de la serpiente
+        const snakeBodyImg = new Image();
+        snakeBodyImg.src = 'imagenes/cuerpo.webp'; // Imagen del cuerpo de la serpiente
+        const appleImg = new Image();
         appleImg.src = 'imagenes/manzana.webp'; // Imagen de la manzana
 
-        // Asegurarse de que las imágenes estén cargadas antes de iniciar el juego
-        var imagesLoaded = false;
-
-        // Función que se ejecuta cuando ambas imágenes están cargadas
-        function checkImagesLoaded() {
-            if (snakeHeadImg.complete && appleImg.complete) {
-                imagesLoaded = true;
-                init(); // Inicializar el juego
-            } else {
-                setTimeout(checkImagesLoaded, 100); // Revisar cada 100ms
-            }
-        }
+        // Cargar sonido
+        const eatSound = new Audio('sonido/assets_apple-crunch-16.mp3');
 
         // Inicializar el juego
         function init() {
-            spawnFood();  // Genera la comida
-            document.addEventListener("keydown", handleKeyInput);  // Control de las teclas
-            setInterval(update, 1000 / fps);  // Actualización del juego
+            spawnFood();
+            document.addEventListener("keydown", handleKeyInput);
+            setInterval(update, 1000 / fps);
         }
 
-        // Manejar las teclas de dirección
+        // Manejo de teclas
         function handleKeyInput(event) {
-            var key = event.key;
-            if ((key === "ArrowUp" || key === "w") && lastDirection !== "Down") {
+            const key = event.key;
+            if ((key === "ArrowUp" || key === "w") && direction !== "Down") {
                 direction = "Up";
-            } else if ((key === "ArrowDown" || key === "s") && lastDirection !== "Up") {
+            } else if ((key === "ArrowDown" || key === "s") && direction !== "Up") {
                 direction = "Down";
-            } else if ((key === "ArrowLeft" || key === "a") && lastDirection !== "Right") {
+            } else if ((key === "ArrowLeft" || key === "a") && direction !== "Right") {
                 direction = "Left";
-            } else if ((key === "ArrowRight" || key === "d") && lastDirection !== "Left") {
+            } else if ((key === "ArrowRight" || key === "d") && direction !== "Left") {
                 direction = "Right";
             }
         }
 
         // Actualizar el juego
         function update() {
-            var head = { ...snake[0] }; // Nueva posición de la cabeza
+            const head = { ...snake[0] };
+            if (direction === "Up") head.y -= BLOCK_SIZE;
+            else if (direction === "Down") head.y += BLOCK_SIZE;
+            else if (direction === "Left") head.x -= BLOCK_SIZE;
+            else if (direction === "Right") head.x += BLOCK_SIZE;
 
-            // Mover la serpiente en la dirección actual
-            if (direction === "Up") {
-                head.y -= BLOCK_SIZE;
-            } else if (direction === "Down") {
-                head.y += BLOCK_SIZE;
-            } else if (direction === "Left") {
-                head.x -= BLOCK_SIZE;
-            } else if (direction === "Right") {
-                head.x += BLOCK_SIZE;
-            }
-
-            // Colisiones con los bordes o con la serpiente
-            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
+            if (checkCollision(head)) {
                 alert("¡Game Over! Puntaje final: " + score);
                 resetGame();
                 return;
             }
 
-            snake.unshift(head); // Añadir nueva cabeza
+            snake.unshift(head);
 
-            // Comprobar si la serpiente ha comido la comida
             if (head.x === food.x && head.y === food.y) {
                 score++;
-                updateScore();
-                eatSound.play(); // Reproducir sonido de comer
+                eatSound.play();
                 spawnFood();
             } else {
-                snake.pop(); // Eliminar la cola si no come
+                snake.pop();
             }
 
-            lastDirection = direction;
             draw();
+            updateScore();
         }
 
-        // Dibujar la serpiente y la comida
+        // Dibujar todo
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // No dibujar si las imágenes no están cargadas
-            if (!imagesLoaded) return;
-
-            // Dibujar la serpiente con la imagen de la cabeza y cuerpo
             snake.forEach((segment, index) => {
                 if (index === 0) {
-                    // Color para la cabeza de la serpiente
-                    ctx.fillStyle = "#7c64a5"; // Color morado claro para la cabeza
-                    ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);  // Dibujar cabeza
+                    // Rotar la cabeza según la dirección (contraria al movimiento)
+                    ctx.save();
+                    ctx.translate(segment.x + BLOCK_SIZE / 2, segment.y + BLOCK_SIZE / 2);
+                    if (direction === "Up") ctx.rotate(Math.PI / 2);
+                    if (direction === "Down") ctx.rotate(-Math.PI / 2);
+                    if (direction === "Left") ctx.rotate(0);
+                    if (direction === "Right") ctx.rotate(Math.PI);
+                    ctx.drawImage(snakeHeadImg, -BLOCK_SIZE / 2, -BLOCK_SIZE / 2, BLOCK_SIZE, BLOCK_SIZE);
+                    ctx.restore();
                 } else {
-                    // Color para el cuerpo de la serpiente
-                    ctx.fillStyle = "#ac8be4"; // Color verde claro para el cuerpo
-                    ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);  // Dibujar cuerpo
+                    ctx.drawImage(snakeBodyImg, segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);
                 }
             });
-
-            // Dibujar la comida con la imagen de la manzana
             ctx.drawImage(appleImg, food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
         }
 
-        // Actualizar el puntaje
-        function updateScore() {
-            document.getElementById("score").innerText = 'Puntaje: ' + score;
-        }
-
-        // Generar comida en una posición aleatoria
+        // Generar comida
         function spawnFood() {
             food = {
                 x: Math.floor(Math.random() * (canvas.width / BLOCK_SIZE)) * BLOCK_SIZE,
-                y: Math.floor(Math.random() * (canvas.height / BLOCK_SIZE)) * BLOCK_SIZE
+                y: Math.floor(Math.random() * (canvas.height / BLOCK_SIZE)) * BLOCK_SIZE,
             };
         }
 
-        // Verificar colisión de la cabeza con el cuerpo
-        function collision(head) {
+        // Colisiones
+        function checkCollision(head) {
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) return true;
             for (let i = 1; i < snake.length; i++) {
-                if (head.x === snake[i].x && head.y === snake[i].y) {
-                    return true;
-                }
+                if (head.x === snake[i].x && head.y === snake[i].y) return true;
             }
             return false;
         }
 
-        // Reiniciar el juego
+        // Reiniciar juego
         function resetGame() {
             snake = [{ x: 100, y: 100 }];
             direction = "Right";
-            lastDirection = direction;
             score = 0;
-            updateScore();
             spawnFood();
         }
 
-        // Iniciar la comprobación de carga de imágenes
-        checkImagesLoaded();
+        // Actualizar puntaje
+        function updateScore() {
+            document.getElementById("score").innerText = "Puntaje: " + score;
+        }
+
+        // Iniciar el juego
+        init();
     </script>
 </body>
 </html>
-
