@@ -14,7 +14,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #4CAF50; /* Fondo verde */
+            background-color: #388E3C; /* Fondo verde */
             height: 100vh;
             justify-content: center;
         }
@@ -82,7 +82,7 @@
         <p id="score">Puntaje: 0</p>
     </div>
     <footer>
-        <p>Desarrollado por <a href="#">[Tu Nombre]</a></p>
+        <p>Desarrollado por <a href="#">[Michelle Womberk y Mel Amaya]</a></p>
     </footer>
 
     <script>
@@ -91,21 +91,40 @@
         var ctx = canvas.getContext("2d");
         var fps = 5;  // Velocidad del juego
         var BLOCK_SIZE = 20;
-        var snake = [{ x: 100, y: 100 }];
+        var snake = [{ x: 100, y: 100 }]; // Cabeza de la serpiente
         var direction = "Right";
         var food = {};
         var lastDirection = direction;
         var score = 0;
 
         // Añadir sonido de comer
-        
         var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); 
 
-        // Iniciar el juego
+        // Cargar las imágenes
+        var snakeHeadImg = new Image();
+        snakeHeadImg.src = 'imagenes/cabeza serpinte.png';  // Imagen de la cabeza de la serpiente
+
+        var appleImg = new Image();
+        appleImg.src = 'imagenes/manzana.webp'; // Imagen de la manzana
+
+        // Asegurarse de que las imágenes estén cargadas antes de iniciar el juego
+        var imagesLoaded = false;
+
+        // Función que se ejecuta cuando ambas imágenes están cargadas
+        function checkImagesLoaded() {
+            if (snakeHeadImg.complete && appleImg.complete) {
+                imagesLoaded = true;
+                init(); // Inicializar el juego
+            } else {
+                setTimeout(checkImagesLoaded, 100); // Revisar cada 100ms
+            }
+        }
+
+        // Inicializar el juego
         function init() {
-            spawnFood();
-            document.addEventListener("keydown", handleKeyInput);
-            setInterval(update, 1000 / fps);
+            spawnFood();  // Genera la comida
+            document.addEventListener("keydown", handleKeyInput);  // Control de las teclas
+            setInterval(update, 1000 / fps);  // Actualización del juego
         }
 
         // Manejar las teclas de dirección
@@ -164,22 +183,30 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Dibujar la serpiente
-            ctx.fillStyle = "#2196F3"; // Azul
-            snake.forEach(segment => {
-                ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);
+            // No dibujar si las imágenes no están cargadas
+            if (!imagesLoaded) return;
+
+            // Dibujar la serpiente con la imagen de la cabeza y cuerpo
+            snake.forEach((segment, index) => {
+                if (index === 0) {
+                    // Color para la cabeza de la serpiente
+                    ctx.fillStyle = "#7c64a5"; // Color morado claro para la cabeza
+                    ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);  // Dibujar cabeza
+                } else {
+                    // Color para el cuerpo de la serpiente
+                    ctx.fillStyle = "#ac8be4"; // Color verde claro para el cuerpo
+                    ctx.fillRect(segment.x, segment.y, BLOCK_SIZE, BLOCK_SIZE);  // Dibujar cuerpo
+                }
             });
 
-            // Dibujar la comida
-            ctx.fillStyle = "#FF5252"; // Rojo
-            ctx.fillRect(food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
+            // Dibujar la comida con la imagen de la manzana
+            ctx.drawImage(appleImg, food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
         }
 
         // Actualizar el puntaje
         function updateScore() {
             document.getElementById("score").innerText = 'Puntaje: ' + score;
         }
-
 
         // Generar comida en una posición aleatoria
         function spawnFood() {
@@ -209,8 +236,9 @@
             spawnFood();
         }
 
-        // Iniciar el juego
-        init();
+        // Iniciar la comprobación de carga de imágenes
+        checkImagesLoaded();
     </script>
 </body>
 </html>
+

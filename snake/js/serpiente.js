@@ -8,9 +8,33 @@ var food = {};
 var lastDirection = direction;
 var score = 0;
 
-
 // Cargar los sonidos
-var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3'); 
+var eatSound = new Audio('sonido/assets_apple-crunch-16.mp3');
+
+// Cargar las imágenes
+var snakeHeadImg = new Image();
+var appleImg = new Image();
+var cuerImg = new Image();
+// Definir las rutas de las imágenes
+snakeHeadImg.src = 'imagenes/cabeza serpiente.png'; // Imagen de la cabeza de la serpiente
+appleImg.src = 'imagenes/manzana.png'; // Imagen de la manzana
+cuerImg.src = 'imagenes/cuerpo.png'; // Imagen del cuerpo de la serpiente
+
+
+// Asegurarse de que las imágenes estén cargadas antes de iniciar el juego
+var imagesLoaded = false;
+
+// Función que se ejecuta cuando ambas imágenes están cargadas
+function checkImagesLoaded() {
+    if (snakeHeadImg.complete && appleImg.complete) {
+        imagesLoaded = true;
+        init(); // Inicializar el juego
+    } else {
+        // Si las imágenes aún no están cargadas, vuelve a revisar cada 100 ms
+        setTimeout(checkImagesLoaded, 100);
+    }
+}
+
 // Inicializa el juego
 function init() {
     spawnFood();  // Genera la comida
@@ -51,7 +75,6 @@ function update() {
 
     // Si la serpiente colisiona con las paredes, termina el juego
     if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision(head)) {
-        gameOverSound.play(); // Reproducir sonido de Game Over
         alert("Game Over! Puntaje: " + score);
         resetGame();
         return;
@@ -77,15 +100,22 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);  // Limpiar el lienzo
 
+    if (!imagesLoaded) return;  // No dibujar si las imágenes no están cargadas
+
     // Dibujar la serpiente
-    ctx.fillStyle = "#00FF00";  // Color verde para la serpiente
     for (var i = 0; i < snake.length; i++) {
-        ctx.fillRect(snake[i].x, snake[i].y, BLOCK_SIZE, BLOCK_SIZE);
+        if (i === 0) {
+            // Dibujar la cabeza de la serpiente
+            ctx.drawImage(snakeHeadImg, snake[i].x, snake[i].y, BLOCK_SIZE, BLOCK_SIZE);
+        } else {
+            // Dibujar el cuerpo de la serpiente (puedes cambiar el color o usar otra imagen)
+            ctx.fillStyle = "#00FF00"; // Verde para el cuerpo
+            ctx.fillRect(snake[i].x, snake[i].y, BLOCK_SIZE, BLOCK_SIZE);
+        }
     }
 
-    // Dibujar la comida
-    ctx.fillStyle = "#FF0000";  // Color rojo para la comida
-    ctx.fillRect(food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
+    // Dibujar la manzana
+    ctx.drawImage(appleImg, food.x, food.y, BLOCK_SIZE, BLOCK_SIZE);
 
     // Mostrar el puntaje
     document.getElementById("FPS").innerHTML = "Puntaje: " + score;
@@ -118,6 +148,5 @@ function resetGame() {
     spawnFood();
 }
 
-// Iniciar el juego
-init();
-;
+// Iniciar la comprobación de carga de imágenes
+checkImagesLoaded();
